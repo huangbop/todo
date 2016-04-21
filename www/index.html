@@ -28,15 +28,25 @@
         <h1 class="title">Ionic Blank Starter</h1>
       </ion-header-bar>
 
-      <ion-content>
+      <ion-content ng-controller="BucketListController">
+
         <div class="list">
           <div class="item item-input-inset">
             <label class="item-input-wrapper">
-              <input type="text">
+              <input type="text" ng-model="bucketListItem.title">
             </label>
-            <button class="button button-small">Add</button>
+            <button class="button button-small" ng-click="addBucketListItem()">Add</button>
           </div>
         </div>
+
+        <ion-list>
+          <ion-item ng-repeat="item in bucketListItems">
+            <h2>{{item.title}}</h2>
+            <ion-option-button class="button-assertive" ng-click="delBucketListItem($index)">Delete</ion-option-button>
+          </ion-item>
+        </ion-list>
+
+
       </ion-content>
 
     </ion-pane>
