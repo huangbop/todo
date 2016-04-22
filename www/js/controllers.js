@@ -41,21 +41,24 @@ angular.module('starter.controllers', [])
     };
   })
 
-  .controller('PlaylistsCtrl', function($scope, $http) {
-    $scope.playlists = [
-      { title: 'Reggae', id: 1 },
-      { title: 'Chill', id: 2 },
-      { title: 'Dubstep', id: 3 },
-      { title: 'Indie', id: 4 },
-      { title: 'Rap', id: 5 },
-      { title: 'Cowbell', id: 6 }
-    ];
+  .controller('PlaylistsCtrl', function($scope, $http, $ionicPopover) {
 
     $scope.sites = [];
     $http.get('sites.json')
       .then(function (response) {
         $scope.sites = response.data;
       });
+
+    $ionicPopover.fromTemplateUrl('templates/popover.html', {
+      scope: $scope
+    }).then(function(popover) {
+      $scope.popover = popover;
+    });
+
+    $scope.openPopover = function ($event) {
+      $scope.popover.show($event);
+    };
+
   })
 
   .controller('PlaylistCtrl', function($scope, $stateParams) {
